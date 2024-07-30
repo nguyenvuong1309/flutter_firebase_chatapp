@@ -2,25 +2,24 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_project/Login%20Signup/Screen/home_screen.dart';
 import 'Real Time Database/query_in_realtime.dart';
+import 'Chat App/chat_page.dart';
+import '../Chat App/login.dart';
 
 Future<void> main() async {
   // Initialize Firebase
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   // Run your app
-  runApp(const MyApp());
+  runApp(MyApp()); // Remove const here
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        // home: RealTimeDatabaseQueary(),
-        home: HomeScreen());
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: HomeeScreen(), // No need for const here
+    );
   }
 }
 // Before start the video setup your project with firebase

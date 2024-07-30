@@ -42,16 +42,15 @@ class _ChatPageState extends State<ChatPage> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height * 0.79,
-              child: MessageScreen(email: email),
-            ),
-            Row(
+      body: Column(
+        children: [
+          Expanded(
+            child: MessageScreen(email: email),
+          ),
+          Container(
+            color: Colors.white,
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            child: Row(
               children: [
                 Expanded(
                   child: TextFormField(
@@ -60,9 +59,7 @@ class _ChatPageState extends State<ChatPage> {
                       filled: true,
                       fillColor: Colors.purple[100],
                       hintText: 'Message',
-                      enabled: true,
-                      contentPadding: const EdgeInsets.only(
-                          left: 14.0, bottom: 8.0, top: 8.0),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 14.0),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.purple),
                         borderRadius: BorderRadius.circular(10),
@@ -94,8 +91,8 @@ class _ChatPageState extends State<ChatPage> {
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

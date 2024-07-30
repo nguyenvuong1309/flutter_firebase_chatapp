@@ -25,6 +25,15 @@ dependencies:
   flutter_pdfview: ^1.3.2
   url_launcher: ^6.3.0
 
+
+  # 
+  dash_chat_2: ^0.0.20
+  firebase_analytics: ^10.8.10
+  google_fonts: ^6.2.1
+  delightful_toast: ^1.1.0
+  get_it: ^7.6.7
+  path: ^1.9.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -33,4 +42,4 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - images/
+    - assets/logo_LuxOasis.png

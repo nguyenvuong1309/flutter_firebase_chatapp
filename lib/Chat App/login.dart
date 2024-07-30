@@ -26,7 +26,7 @@ class _HomeeScreenState extends State<HomeeScreen> {
         child: Column(
           children: <Widget>[
             Container(
-              color: Colors.blue[900],
+              color: Color(0xFFFFFF),
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.70,
               child: Center(
@@ -41,11 +41,18 @@ class _HomeeScreenState extends State<HomeeScreen> {
                         SizedBox(
                           height: 30,
                         ),
+                        Image.asset(
+                          'assets/logo_LuxOasis.png',
+                          height: 80,
+                          width: 300,
+                          fit: BoxFit.contain,
+                          // Add any additional properties for the image here
+                        ),
                         Text(
                           "Login",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color:  Color(0xFF2F7682),
                             fontSize: 40,
                           ),
                         ),
@@ -56,7 +63,7 @@ class _HomeeScreenState extends State<HomeeScreen> {
                           controller: emailController,
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: Colors.white,
+                            fillColor:  Color(0xff55c8bd),
                             hintText: 'Email',
                             enabled: true,
                             contentPadding: const EdgeInsets.only(
@@ -104,7 +111,7 @@ class _HomeeScreenState extends State<HomeeScreen> {
                                   });
                                 }),
                             filled: true,
-                            fillColor: Colors.white,
+                            fillColor:  Color(0xff55c8bd),
                             hintText: 'Password',
                             enabled: true,
                             contentPadding: const EdgeInsets.only(
@@ -135,17 +142,15 @@ class _HomeeScreenState extends State<HomeeScreen> {
                           keyboardType: TextInputType.emailAddress,
                         ),
                         ElevatedButton(
-                          style: ElevatedButton.styleFrom(backgroundColor:Colors.blue[900] ),
-                      
-                      
-                         
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFF2F7682),
+                          ),
                           onPressed: () {},
                           child: Text(
                             "Forgot Password ....",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
-                              decoration: TextDecoration.underline,
                             ),
                           ),
                         ),
@@ -183,7 +188,7 @@ class _HomeeScreenState extends State<HomeeScreen> {
                             visible: visible,
                             child: Container(
                                 child: CircularProgressIndicator(
-                              color: Colors.white,
+                              color: Color(0xFF2F7682),
                             ))),
                       ],
                     ),
@@ -218,7 +223,7 @@ class _HomeeScreenState extends State<HomeeScreen> {
                           ),
                         );
                       },
-                      color: Colors.blue[900],
+                      color: Color(0xFF2F7682),
                       child: Text(
                         "Register Now",
                         style: TextStyle(
@@ -230,24 +235,31 @@ class _HomeeScreenState extends State<HomeeScreen> {
                     SizedBox(
                       height: 15,
                     ),
-                    Text(
-                      "Made by",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 40,
-                      ),
-                    ),
+                    // Text(
+                    //   "LuxOasis",
+                    //   style: TextStyle(
+                    //     fontWeight: FontWeight.bold,
+                    //     fontSize: 40,
+                    //   ),
+                    // ),
                     SizedBox(
                       height: 5,
                     ),
-                    Text(
-                      "WEBFUN",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
-                        color: Colors.yellowAccent[400],
-                      ),
-                    ),
+                    // Text(
+                    //   "WEBFUN",
+                    //   style: TextStyle(
+                    //     fontWeight: FontWeight.bold,
+                    //     fontSize: 30,
+                    //     color: Colors.yellowAccent[400],
+                    //   ),
+                    // ),
+                    //  Image.asset(
+                    //           'assets/logo_LuxOasis.png',
+                    //           height: 40,
+                    //           width: 200,
+                    //           fit: BoxFit.contain,
+                    //           // Add any additional properties for the image here
+                    //   ),
                   ],
                 ),
               ),
