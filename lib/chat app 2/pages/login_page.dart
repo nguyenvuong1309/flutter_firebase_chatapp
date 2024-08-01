@@ -66,14 +66,14 @@ class _LoginPageState extends State<LoginPage> {
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             "Welcome to LuxOasis",
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w800,
             ),
           ),
-          Text(
+          const Text(
             "Hello again, you've been missed",
             style: TextStyle(
               fontSize: 15,
@@ -88,6 +88,16 @@ class _LoginPageState extends State<LoginPage> {
               height: 80,
               width: 300,
               fit: BoxFit.contain,
+            ),
+          ),
+          const Center(
+            child: Text(
+              "Login",
+              style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.w900,
+                color: Color(0xFF2F7682),
+              ),
             ),
           ),
         ],

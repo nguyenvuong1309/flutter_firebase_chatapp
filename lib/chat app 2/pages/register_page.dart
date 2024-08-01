@@ -72,7 +72,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ), // Center
               ) // Expanded
           ], // Column  // Padding
-        ), // SafeArea
+        ), // SafeArea)
       ),
     );
   }
@@ -80,19 +80,19 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget _headerText() {
     return SizedBox(
       width:
-          MediaQuery.of(context).size.width, // Sử dụng MediaQuery.of(context)
+          MediaQuery.of(context).size.width,
       child: Column(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             "Let's get started!",
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w800,
             ),
           ),
-          Text(
+          const Text(
             "Register a new account",
             style: TextStyle(
               fontSize: 15,
@@ -109,6 +109,16 @@ class _RegisterPageState extends State<RegisterPage> {
               fit: BoxFit.contain,
             ),
           ),
+          const Center(
+            child: Text(
+              "Sign up",
+              style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.w900,
+                color: Color(0xFF2F7682),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -116,7 +126,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget _registerForm() {
     return Container(
-      height: MediaQuery.sizeOf(context).height * 0.60,
+      height: MediaQuery.sizeOf(context).height * 0.50,
       margin: EdgeInsets.symmetric(
         vertical: MediaQuery.sizeOf(context).height * 0.05,
       ), // EdgeInsets.symmetric
@@ -194,7 +204,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: MaterialButton(
-        color: Color(0xFF2F7682), //Theme.of(context).colorScheme.primary,
+        color: Color(0xFF2F7682),
         onPressed: () async {
           setState(() {
             isLoading = true;
@@ -214,7 +224,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     userProfile: UserProfile(
                         uid: _authService.user!.uid,
                         name: name,
-                        pfpURL: pfpURL), // UserProfile
+                        pfpURL: pfpURL),
                   );
                   _alertService.showToast(
                     text: "User registered successfully!",
@@ -244,10 +254,10 @@ class _RegisterPageState extends State<RegisterPage> {
           "Register",
           style: TextStyle(
             color: Colors.white,
-          ), // TextStyle
-        ), // Text
-      ), // MaterialButton
-    ); // SizedBox
+          ),
+        ),
+      ),
+    ); 
   }
 
   Widget _loginAccountLink() {
@@ -266,7 +276,7 @@ class _RegisterPageState extends State<RegisterPage> {
               "Login",
               style: TextStyle(
                 fontWeight: FontWeight.w800,
-              ), // TextStyle ), // Text
+              ),
             ),
           )
         ],

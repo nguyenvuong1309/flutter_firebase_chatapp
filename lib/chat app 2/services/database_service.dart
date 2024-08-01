@@ -54,7 +54,7 @@ class DatabaseService {
   Future<void> createNewChat(String uid1, String uid2) async {
     String chatID = generateChatID(uid1: uid1, uid2: uid2);
     final docRef = _chatsCollection!.doc(chatID);
-    final chat = Chat(
+    final chat = Chat( 
       id: chatID,
       participants: [uid1, uid2],
       messages: [],
@@ -77,6 +77,7 @@ class DatabaseService {
     return _chatsCollection!
         .doc(chatID)
         .snapshots()
-        .map((snapshot) => snapshot as DocumentSnapshot<Chat>);
+        as Stream<DocumentSnapshot<Chat>>;
+    //.map((snapshot) => snapshot as DocumentSnapshot<Chat>);
   }
 }
