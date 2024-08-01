@@ -17,7 +17,7 @@ https://github.com/user-attachments/assets/e3f3b7a5-9238-49ff-a6b8-ea6d65c850c9
 ## About the project.
 
 **This project utilizes Flutter and Google Firebase to create a real-time chat application. Key features of the app include:**
-1. **User Authentication** : Seamless sign-in and sign-up using Firebase Authentication.
+1. **User Authentication** : Sign-in and sign-up using Firebase Authentication.
 2. **Messaging** : Capability to send both text and image messages.
 3. **Real-time Updates** : Instant updates for sent and received messages, ensuring a smooth and responsive chat experience.
 4. **Responsive UI** : Adaptive user interface using Flexbox.
