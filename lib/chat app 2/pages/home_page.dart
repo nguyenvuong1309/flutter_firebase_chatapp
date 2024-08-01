@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import '../pages/chat_page.dart';
+import '../models/user_profile.dart';
 import '../services/alert_service.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';
 import '../services/navigation_service.dart';
+import '../widgets/chat_title.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -39,7 +42,6 @@ class _HomepageState extends State<Homepage> {
           IconButton(
             onPressed: () async {
               bool result = await _authService.logout();
-              print(result);
               if (result) {
                 _alertService.showToast(
                   text: "Successfully logged out!",
@@ -80,9 +82,41 @@ class _HomepageState extends State<Homepage> {
               child: Text("Unable to load data."),
             ); // Center
           }
-          print("snapshot.data ${snapshot.data}");
           if (snapshot.hasData && snapshot.data != null) {
-            return ListView();
+            final users = snapshot.data!.docs;
+            return ListView.builder(
+              itemCount: users.length,
+              itemBuilder: (context, index) {
+                UserProfile user = users[index].data();
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: ChatTile(
+                    userProfile: user,
+                    onTap: () async {
+                      final chatExists = await _databaseService.checkChatExists(
+                        _authService.user!.uid,
+                        user.uid!,
+                      );
+                      if (!chatExists) {
+                        await _databaseService.createNewChat(
+                          _authService.user!.uid,
+                          user.uid!,
+                        );
+                      }
+                      _navigationService.push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return ChatPage(
+                              chatUser: user,
+                            ); // ChatPage
+                          },
+                        ), // MaterialPageRoute)
+                      );
+                    },
+                  ), // ChatTile
+                );
+              },
+            ); // ListView.builder
           }
           return const Center(
             child: CircularProgressIndicator(),

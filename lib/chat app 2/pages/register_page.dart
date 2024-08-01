@@ -204,10 +204,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 selectedImage != null) {
               _registerFormKey.currentState?.save();
               bool result = await _authService.signup(email!, password!);
-              print("--result ${result}");
               if (result) {
-                print("--result ${selectedImage!}");
-                print("--result ${_authService.user!.uid}");
                 String? pfpURL = await _storageService.uploadUserPfp(
                   file: selectedImage!,
                   uid: _authService.user!.uid,
@@ -217,7 +214,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     userProfile: UserProfile(
                         uid: _authService.user!.uid,
                         name: name,
-                        pfpURL: "pfpURL"), // UserProfile
+                        pfpURL: pfpURL), // UserProfile
                   );
                   _alertService.showToast(
                     text: "User registered successfully!",
@@ -231,7 +228,6 @@ class _RegisterPageState extends State<RegisterPage> {
               } else {
                 throw Exception("Unable to register user");
               }
-              print(result);
             }
           } catch (e) {
             print(e);
