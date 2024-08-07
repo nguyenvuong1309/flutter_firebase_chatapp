@@ -16,4 +16,9 @@ class AppColors {
   static const Color indigo = Colors.indigo;
   static const Color lime = Colors.lime;
   static const Color teal = Colors.teal;
+  static const Gradient primaryBackground = LinearGradient(
+    colors: [Color.fromARGB(255, 181, 18, 181), Color.fromARGB(255, 157, 26, 222)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 }

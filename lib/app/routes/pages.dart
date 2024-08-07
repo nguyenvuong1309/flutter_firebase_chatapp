@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firebase_chatapp/common/middlewares/router_welcome.dart';
 import 'package:flutter_firebase_chatapp/modules/application/index.dart';
 import 'package:flutter_firebase_chatapp/modules/auth/pages/sign_in/index.dart';
+import 'package:flutter_firebase_chatapp/modules/contacts/pages/index.dart';
 import 'package:flutter_firebase_chatapp/modules/welcome/index.dart';
 import 'package:flutter_firebase_chatapp/utils/constant.utils.dart';
 import 'package:get/get.dart';
@@ -28,6 +29,11 @@ class AppPages {
       name: AppRoutes.Application,
       page: () => const ApplicationPage(),
       binding: ApplicationBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.Contact,
+      page: () => const ContactPage(),
+      binding: ContactBinding(),
     )
   ];
 }
