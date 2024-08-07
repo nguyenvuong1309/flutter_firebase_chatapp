@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_firebase_project/chat%20app%202/utils/utils.dart';
+import 'package:flutter_firebase_chatapp/chat%20app%202/utils/utils.dart';
 import 'package:get_it/get_it.dart';
 
 import '../models/chat.dart';

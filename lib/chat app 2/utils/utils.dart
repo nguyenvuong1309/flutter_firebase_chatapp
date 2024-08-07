@@ -1,10 +1,10 @@
-import 'package:flutter_firebase_project/chat%20app%202/services/alert_service.dart';
-import 'package:flutter_firebase_project/chat%20app%202/services/media_service.dart';
-import 'package:flutter_firebase_project/chat%20app%202/services/storage_service.dart';
-import 'package:flutter_firebase_project/firebase_options.dart';
+import 'package:flutter_firebase_chatapp/chat%20app%202/services/alert_service.dart';
+import 'package:flutter_firebase_chatapp/chat%20app%202/services/media_service.dart';
+import 'package:flutter_firebase_chatapp/chat%20app%202/services/storage_service.dart';
+import 'package:flutter_firebase_chatapp/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_firebase_project/chat app 2/services/auth_service.dart';
-import 'package:flutter_firebase_project/chat app 2/services/navigation_service.dart'; 
+import 'package:flutter_firebase_chatapp/chat app 2/services/auth_service.dart';
+import 'package:flutter_firebase_chatapp/chat app 2/services/navigation_service.dart'; 
 import 'package:get_it/get_it.dart';
 
 import '../services/database_service.dart';

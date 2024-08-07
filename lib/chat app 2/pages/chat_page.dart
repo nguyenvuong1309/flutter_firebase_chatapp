@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dash_chat_2/dash_chat_2.dart';
-import 'package:flutter_firebase_project/chat%20app%202/services/auth_service.dart';
-import 'package:flutter_firebase_project/chat%20app%202/services/database_service.dart';
-import 'package:flutter_firebase_project/chat%20app%202/services/media_service.dart';
+import 'package:flutter_firebase_chatapp/chat%20app%202/services/auth_service.dart';
+import 'package:flutter_firebase_chatapp/chat%20app%202/services/database_service.dart';
+import 'package:flutter_firebase_chatapp/chat%20app%202/services/media_service.dart';
 import 'package:get_it/get_it.dart';
 
 import '../models/chat.dart';

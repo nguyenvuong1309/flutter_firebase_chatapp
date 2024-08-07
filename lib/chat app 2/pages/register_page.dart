@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase_project/chat%20app%202/services/alert_service.dart';
-import 'package:flutter_firebase_project/chat%20app%202/services/database_service.dart';
-import 'package:flutter_firebase_project/chat%20app%202/services/media_service.dart';
-import 'package:flutter_firebase_project/chat%20app%202/services/storage_service.dart';
+import 'package:flutter_firebase_chatapp/chat%20app%202/services/alert_service.dart';
+import 'package:flutter_firebase_chatapp/chat%20app%202/services/database_service.dart';
+import 'package:flutter_firebase_chatapp/chat%20app%202/services/media_service.dart';
+import 'package:flutter_firebase_chatapp/chat%20app%202/services/storage_service.dart';
 import 'package:get_it/get_it.dart';
 
 import '../consts.dart';
