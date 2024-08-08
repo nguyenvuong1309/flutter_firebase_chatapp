@@ -11,6 +11,7 @@ class ContactPage extends GetView<ContactController> {
 
   @override
   Widget build(BuildContext context) {
+    print("🚀 ~ ContactPage ~ Widgetbuild ~ BuildContext:${controller.state.contactList.length}");
     AppBar _buildAppBar() {
       return transparentAppBar(
           titleText: "Contact",
@@ -23,5 +24,5 @@ class ContactPage extends GetView<ContactController> {
       appBar: _buildAppBar(),
       body: ContactList(),
     );
-  }
+  }   
 }

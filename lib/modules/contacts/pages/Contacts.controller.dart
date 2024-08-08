@@ -14,6 +14,7 @@ class ContactController extends GetxController {
   @override
   void onReady() {
     super.onReady();
+    print('🚀 ~ ContactController ~ $token:');
     asyncLoadAllData();
   }
 
@@ -26,7 +27,8 @@ class ContactController extends GetxController {
             toFirestore: (UserData userdata, options) => userdata.toFirestore())
         .get();
     for(var doc in usersbase.docs){
-      print("🚀 ~ ContactController ~ asyncLoadAllData ~ $doc");
+      print(
+          "🚀 ~ ContactController ~ asyncLoadAllData ~ ${doc.data.toString()}");
       state.contactList.add(doc.data());
     }
   }

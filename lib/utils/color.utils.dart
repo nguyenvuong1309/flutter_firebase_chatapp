@@ -21,4 +21,5 @@ class AppColors {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
+  static const Color thirdElement = Colors.teal;
 }
