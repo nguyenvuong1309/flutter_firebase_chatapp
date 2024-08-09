@@ -19,7 +19,7 @@ class ConfigStore extends GetxController {
   ];
 
   @override
-  void OnInit() {
+  void onInit() {
     super.onInit();
     isFirstOpen = StorageService.to.getBool("STORAGE_DEVICE_FIRST_OPEN_KEY");
   }
