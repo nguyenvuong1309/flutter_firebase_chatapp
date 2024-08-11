@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_chatapp/chats/view/chats_page.dart';
 import 'package:flutter_firebase_chatapp/common/middlewares/router_welcome.dart';
 import 'package:flutter_firebase_chatapp/modules/application/index.dart';
 import 'package:flutter_firebase_chatapp/modules/auth/pages/sign_in/index.dart';
@@ -38,8 +39,8 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.Chat,
-      page: () => const ChatPage(),
-      binding: ChatBinding(),
+      page: () => const ChatsPage(),
+      // binding: ChatBinding(),
     )
   ];
 }

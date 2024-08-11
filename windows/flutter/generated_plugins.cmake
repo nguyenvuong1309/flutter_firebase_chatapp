@@ -3,11 +3,14 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  app_links
   cloud_firestore
   file_selector_windows
   firebase_auth
   firebase_core
   firebase_storage
+  powersync_flutter_libs
+  sqlite3_flutter_libs
   url_launcher_windows
 )
 

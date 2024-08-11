@@ -39,13 +39,78 @@ dependencies:
   package_info_plus: ^8.0.1
   shared_preferences: ^2.3.1
   cached_network_image: ^3.4.0
+  equatable: ^2.0.5
+  bloc: ^8.1.4
+  json_annotation: ^4.9.0
+  flutter_bloc: ^8.1.6
+  go_router: ^13.2.5
+  hydrated_bloc: ^9.1.5
+  scrollable_positioned_list: ^0.3.8
+  inview_notifier_list:
+    git: https://github.com/Gambley1/inview_notifier_list
+  animations: ^2.0.11
+  fast_immutable_collections: ^10.2.4
+  palette_generator: ^0.3.3+4
+  story_view: ^0.16.5
+  flutter_staggered_grid_view: ^0.7.0
+  sliver_tools: ^0.2.12
+  slang_flutter: ^3.31.0
+  slang: ^3.31.1
+  lottie: ^3.1.2
+  flutter_localizations:
+    sdk: flutter
+  app_ui:
+    path: packages/app_ui
+  chats_repository:
+    path: packages/chats_repository
+  shared:
+    path: packages/shared
+  form_fields:
+    path: packages/form_fields
+  notifications_repository:
+    path: packages/notifications_repository
+  supabase_authentication_client:
+    path: packages/authentication_client/supabase_authentication_client
+  firebase_notifications_client:
+    path: packages/notifications_client/firebase_notifications_client
+
+
+  persistent_storage:
+    path: packages/storage/persistent_storage
+  posts_repository:
+    path: packages/posts_repository
+  powersync_repository:
+    path: packages/powersync_repository
+  search_repository:
+    path: packages/search_repository
+  stories_editor:
+    path: packages/stories_editor
+  stories_repository:
+    path: packages/stories_repository
+  token_storage:
+    path: packages/authentication_client/token_storage
+  user_repository:
+    path: packages/user_repository
+  instagram_blocks_ui:
+    path: packages/instagram_blocks_ui
+  firebase_remote_config_repository:
+    path: packages/firebase_remote_config_repository
+
+
+
+dependency_overrides:
+  fading_edge_scrollview: ^4.1.1
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
+  build_runner: ^2.4.10
+  slang_build_runner: ^3.31.0
 
 flutter:
+  generate: true
   uses-material-design: true
   assets:
     - assets/logo_LuxOasis.png
