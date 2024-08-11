@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase_chatapp/modules/contacts/pages/Contacts.view.dart';
+import 'package:flutter_firebase_chatapp/modules/contacts/pages/contact-list/index.dart';
 import 'package:flutter_firebase_chatapp/utils/color.utils.dart';
 import 'package:get/get.dart';
 import 'package:flutter_firebase_chatapp/modules/application/Application.controller.dart';

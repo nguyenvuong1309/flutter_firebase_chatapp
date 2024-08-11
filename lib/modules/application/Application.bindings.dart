@@ -1,4 +1,4 @@
-import 'package:flutter_firebase_chatapp/modules/contacts/pages/index.dart';
+import 'package:flutter_firebase_chatapp/modules/contacts/pages/contact-list/index.dart';
 import 'package:get/get.dart';
 
 import 'Application.controller.dart';

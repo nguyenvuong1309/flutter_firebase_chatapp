@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase_chatapp/modules/contacts/pages/Contacts.controller.dart';
+import 'package:flutter_firebase_chatapp/modules/contacts/pages/contact-list/Contacts.controller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_firebase_chatapp/utils/color.utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

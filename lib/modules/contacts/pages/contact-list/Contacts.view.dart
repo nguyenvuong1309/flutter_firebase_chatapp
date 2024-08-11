@@ -3,7 +3,7 @@ import 'package:flutter_firebase_chatapp/common/wigets/index.dart';
 import 'package:flutter_firebase_chatapp/modules/contacts/widgets/contact_list.dart';
 import 'package:flutter_firebase_chatapp/utils/color.utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_firebase_chatapp/modules/contacts/pages/index.dart';
+import 'package:flutter_firebase_chatapp/modules/contacts/pages/contact-list/index.dart';
 import 'package:get/get.dart';
 
 class ContactPage extends GetView<ContactController> {
