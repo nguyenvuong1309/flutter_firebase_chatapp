@@ -42,6 +42,7 @@ class DatabaseService {
         ?.where("uid", isNotEqualTo: _authService.user!.uid)
         .snapshots() as Stream<QuerySnapshot<UserProfile>>;
   }
+
   Future<bool> checkChatExists(String uid1, String uid2) async {
     String chatID = generateChatID(uid1: uid1, uid2: uid2);
     final result = await _chatsCollection?.doc(chatID).get();
@@ -54,7 +55,7 @@ class DatabaseService {
   Future<void> createNewChat(String uid1, String uid2) async {
     String chatID = generateChatID(uid1: uid1, uid2: uid2);
     final docRef = _chatsCollection!.doc(chatID);
-    final chat = Chat( 
+    final chat = Chat(
       id: chatID,
       participants: [uid1, uid2],
       messages: [],
@@ -74,9 +75,7 @@ class DatabaseService {
 
   Stream<DocumentSnapshot<Chat>> getChatData(String uid1, String uid2) {
     String chatID = generateChatID(uid1: uid1, uid2: uid2);
-    return _chatsCollection!
-        .doc(chatID)
-        .snapshots()
+    return _chatsCollection!.doc(chatID).snapshots()
         as Stream<DocumentSnapshot<Chat>>;
     //.map((snapshot) => snapshot as DocumentSnapshot<Chat>);
   }

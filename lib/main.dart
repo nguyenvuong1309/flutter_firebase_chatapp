@@ -8,46 +8,35 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'app/store/config.dart';
 import 'common/services/StorageService.dart';
 
-
-
-
-
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Get.putAsync<StorageService>(() => StorageService().init());
   Get.put<ConfigStore>(ConfigStore());
   Get.put<UserStore>(UserStore());
-  
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const MyApp());
 }
 
-
 class MyApp extends StatelessWidget {
-const MyApp({super.key});
+  const MyApp({super.key});
   @override
-Widget build(BuildContext context) {
-return ScreenUtilInit( 
-  builder: (BuildContext context, Widget? child) =>
-        GetMaterialApp(
-      title: 'Flutter',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      initialRoute: AppPages.INITIAL,
-      getPages: AppPages.routes,
-      // home: Center(child: Container(child: Text("Vuong")))
-    )
-  );
+  Widget build(BuildContext context) {
+    return ScreenUtilInit(
+        builder: (BuildContext context, Widget? child) => GetMaterialApp(
+              title: 'Flutter',
+              theme: ThemeData(
+                primarySwatch: Colors.blue,
+              ),
+              initialRoute: AppPages.INITIAL,
+              getPages: AppPages.routes,
+              // home: Center(child: Container(child: Text("Vuong")))
+            ));
   }
 }
-
-
-
 
 // void main() Color.fromARGB(255, 58, 67, 75)   await setup();
 //   runApp(MyApp());
@@ -90,7 +79,3 @@ return ScreenUtilInit(
 //     ); // MaterialApp further ubet l'd like to do is open th
 //   }
 // }
-
-
-
-

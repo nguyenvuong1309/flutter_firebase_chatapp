@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firebase_chatapp/modules/contacts/pages/Contacts.view.dart';
 import 'package:flutter_firebase_chatapp/utils/color.utils.dart';
 import 'package:get/get.dart';
-import 'Application.controller.dart';
+import 'package:flutter_firebase_chatapp/modules/application/Application.controller.dart';
+
 
 class ApplicationPage extends GetView<ApplicationController> {
   const ApplicationPage({Key? key}) : super(key: key);

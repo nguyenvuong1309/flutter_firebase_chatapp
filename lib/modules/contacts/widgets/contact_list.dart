@@ -10,25 +10,28 @@ import 'package:get/get.dart';
 
 class ContactList extends GetView<ContactController> {
   const ContactList({Key? key}) : super(key: key);
-    Widget BuildListItem(UserData item) {
+  Widget BuildListItem(UserData item) {
     print("🚀 ~ ContactList ~ WidgetBuildListItem ~ ${item.photourl}");
-      return Container(
+    return Container(
         padding: EdgeInsets.only(top: 15.w, left: 15.w, right: 15.w),
-          child: InkWell(
-              onTap: () {},
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
+        child: InkWell(
+            onTap: () {
+              if (item.id != null) {
+                controller.goChat(item);
+              }
+            },
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
                       padding:
                           EdgeInsets.only(top: 0.w, left: 0.w, right: 15.w),
-                        child: SizedBox(
-                            width: 54.w,
-                            height: 54.w,
-                            child: CachedNetworkImage(
-                                imageUrl: "${item.photourl}")))
-                  ,
+                      child: SizedBox(
+                          width: 54.w,
+                          height: 54.w,
+                          child: CachedNetworkImage(
+                              imageUrl: "${item.photourl}"))),
                   Container(
                       width: 250.w,
                       padding: EdgeInsets.only(
@@ -49,16 +52,16 @@ class ContactList extends GetView<ContactController> {
                                     color: AppColors.thirdElement,
                                     fontSize: 16.sp)))
                       ]))
-                  ])));
-    }
+                ])));
+  }
 
   @override
   Widget build(BuildContext context) {
     return Obx(() => CustomScrollView(slivers: [
-      SliverPadding(
-          padding: EdgeInsets.symmetric(vertical: 0.w, horizontal: 0.w),
-          sliver: SliverList(
-              delegate: SliverChildBuilderDelegate((context, index) {
+          SliverPadding(
+              padding: EdgeInsets.symmetric(vertical: 0.w, horizontal: 0.w),
+              sliver: SliverList(
+                  delegate: SliverChildBuilderDelegate((context, index) {
                 // print(
                 //     "🚀 ~ ContactList ~ delegate:SliverChildBuilderDelegate ~ ${controller.state.contactList?.length}");
                 // var item = controller.state.contactList[index];
@@ -67,13 +70,13 @@ class ContactList extends GetView<ContactController> {
                 if (controller.state.contactList != null &&
                     index < controller.state.contactList.length) {
                   var item = controller.state.contactList[index];
-                 
+
                   return BuildListItem(item);
                 } else {
                   // Optionally handle the case where the list is null or index is out of bounds
                   return SizedBox.shrink(); // Or any other placeholder
                 }
-          }, childCount: controller.state.contactList.length)))
+              }, childCount: controller.state.contactList.length)))
         ]));
   }
 }

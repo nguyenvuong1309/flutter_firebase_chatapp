@@ -3,7 +3,7 @@ final RegExp EMAIL_VALIDATION_REGEX =
 
 final RegExp PASSWORD_VALIDATION_REGEX =
     // RegExp(r"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$");
-		RegExp(r'^\d+$');
+    RegExp(r'^\d+$');
 
 final RegExp NAME_VALIDATION_REGEX = RegExp(r"\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+");
 

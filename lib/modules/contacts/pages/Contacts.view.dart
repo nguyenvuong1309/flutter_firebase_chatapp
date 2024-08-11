@@ -11,18 +11,26 @@ class ContactPage extends GetView<ContactController> {
 
   @override
   Widget build(BuildContext context) {
-    print("🚀 ~ ContactPage ~ Widgetbuild ~ BuildContext:${controller.state.contactList.length}");
+    print(
+        "🚀 ~ ContactPage ~ Widgetbuild ~ BuildContext:${controller.state.contactList.length}");
     AppBar _buildAppBar() {
       return transparentAppBar(
           titleText: "Contact",
           titleStyle:
               TextStyle(color: AppColors.white, fontWeight: FontWeight.w900),
-          backgroundGradient: AppColors.primaryBackground);
+          backgroundGradient: LinearGradient(
+            colors: [
+              Color.fromARGB(255, 181, 18, 181),
+              Color.fromARGB(255, 157, 26, 222)
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ));
     }
 
     return Scaffold(
       appBar: _buildAppBar(),
       body: ContactList(),
     );
-  }   
+  }
 }

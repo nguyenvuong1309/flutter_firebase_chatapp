@@ -3,11 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-	User? _user;
+  User? _user;
 
-	User? get user{
-		return _user;
-	}
+  User? get user {
+    return _user;
+  }
 
   AuthService() {
     _firebaseAuth.authStateChanges().listen(authStateChangesStreamListener);
@@ -15,13 +15,14 @@ class AuthService {
 
   Future<bool> login(String email, String password) async {
     try {
-      UserCredential credential = await _firebaseAuth.signInWithEmailAndPassword(
+      UserCredential credential =
+          await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
       if (credential.user != null) {
         // Assuming you might want to do something with the user object
-				_user = credential.user;
+        _user = credential.user;
         return true;
       }
     } catch (e) {
@@ -30,6 +31,7 @@ class AuthService {
     }
     return false;
   }
+
   Future<bool> logout() async {
     try {
       await _firebaseAuth.signOut();

@@ -79,8 +79,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget _headerText() {
     return SizedBox(
-      width:
-          MediaQuery.of(context).size.width,
+      width: MediaQuery.of(context).size.width,
       child: Column(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -257,7 +256,7 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ),
       ),
-    ); 
+    );
   }
 
   Widget _loginAccountLink() {

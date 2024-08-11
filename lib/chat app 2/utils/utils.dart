@@ -4,21 +4,19 @@ import 'package:flutter_firebase_chatapp/chat%20app%202/services/storage_service
 import 'package:flutter_firebase_chatapp/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_firebase_chatapp/chat app 2/services/auth_service.dart';
-import 'package:flutter_firebase_chatapp/chat app 2/services/navigation_service.dart'; 
+import 'package:flutter_firebase_chatapp/chat app 2/services/navigation_service.dart';
 import 'package:get_it/get_it.dart';
 
 import '../services/database_service.dart';
-
 
 // import 'package:firebase_core/firebase_core.dart';
 // import 'package:firebase_chat_app_tutorial/firebase_options.dart'; // Ensure this file is correctly set up
 // import 'package:firebase_chat_app_tutorial/services/auth_service.dart'; // Ensure the file path is correct
 // import 'package:get_it/get_it.dart';
 
-
 Future<void> setupFirebase() async {
-	  await Firebase.initializeApp(
-	  	options: DefaultFirebaseOptions.currentPlatform,
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
   );
 }
 
