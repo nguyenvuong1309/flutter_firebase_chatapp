@@ -95,6 +95,7 @@ dependencies:
     path: packages/instagram_blocks_ui
   firebase_remote_config_repository:
     path: packages/firebase_remote_config_repository
+  envied: ^0.5.4+1
 
 
 
@@ -106,8 +107,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
-  build_runner: ^2.4.10
+  build_runner: ^2.4.11
   slang_build_runner: ^3.31.0
+  envied_generator: ^0.5.4+1
 
 flutter:
   generate: true
