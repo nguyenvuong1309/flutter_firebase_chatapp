@@ -1,81 +1,83 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_firebase_chatapp/app/routes/pages.dart';
-import 'package:flutter_firebase_chatapp/common/models/user.dart';
-import 'package:flutter_firebase_chatapp/firebase_options.dart';
-import 'package:get/get.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'app/store/config.dart';
-import 'common/services/StorageService.dart';
+import 'package:chats_repository/chats_repository.dart';
+import 'package:database_client/database_client.dart';
+import 'package:env/env.dart';
+import 'package:firebase_notifications_client/firebase_notifications_client.dart';
+import 'package:flutter_firebase_chatapp/app/app.dart';
+import 'package:flutter_firebase_chatapp/bootstrap.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:notifications_repository/notifications_repository.dart';
+import 'package:persistent_storage/persistent_storage.dart';
+import 'package:posts_repository/posts_repository.dart';
+import 'package:search_repository/search_repository.dart';
+import 'package:shared/shared.dart';
+import 'package:stories_repository/stories_repository.dart';
+import 'package:supabase_authentication_client/supabase_authentication_client.dart';
+import 'package:token_storage/token_storage.dart';
+import 'package:user_repository/user_repository.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+void main() {
+  bootstrap(
+    (
+      powerSyncRepository,
+      firebaseMessaging,
+      sharedPreferences,
+      firebaseRemoteConfigRepository,
+    ) async {
+      final firebaseNotificationsClient =
+          FirebaseNotificationsClient(firebaseMessaging: firebaseMessaging);
 
-  await Get.putAsync<StorageService>(() => StorageService().init());
-  Get.put<ConfigStore>(ConfigStore());
-  Get.put<UserStore>(UserStore());
+      final notificationsRepository = NotificationsRepository(
+        notificationsClient: firebaseNotificationsClient,
+      );
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+      final tokenStorage = InMemoryTokenStorage();
+
+      final iosClientId = getIt<AppFlavor>().getEnv(Env.iOSClientId);
+      final webClientId = getIt<AppFlavor>().getEnv(Env.webClientId);
+      final googleSignIn =
+          GoogleSignIn(clientId: iosClientId, serverClientId: webClientId);
+
+      final authenticationClient = SupabaseAuthenticationClient(
+        powerSyncRepository: powerSyncRepository,
+        tokenStorage: tokenStorage,
+        googleSignIn: googleSignIn,
+      );
+
+      final databaseClient =
+          PowerSyncDatabaseClient(powerSyncRepository: powerSyncRepository);
+
+      final persistentStorage =
+          PersistentStorage(sharedPreferences: sharedPreferences);
+
+      final storiesStorage = StoriesStorage(storage: persistentStorage);
+
+      final userRepository = UserRepository(
+        databaseClient: databaseClient,
+        authenticationClient: authenticationClient,
+      );
+
+      final searchRepository = SearchRepository(databaseClient: databaseClient);
+
+      final postsRepository = PostsRepository(databaseClient: databaseClient);
+
+      final chatsRepository = ChatsRepository(databaseClient: databaseClient);
+
+      final storiesRepository = StoriesRepository(
+        databaseClient: databaseClient,
+        storage: storiesStorage,
+      );
+
+      return App(
+        userRepository: userRepository,
+        postsRepository: postsRepository,
+        chatsRepository: chatsRepository,
+        storiesRepository: storiesRepository,
+        searchRepository: searchRepository,
+        notificationsRepository: notificationsRepository,
+        firebaseRemoteConfigRepository: firebaseRemoteConfigRepository,
+        user: await userRepository.user.first,
+      );
+    },
+    appFlavor: AppFlavor.development(),
   );
-  runApp(const MyApp());
 }
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return ScreenUtilInit(
-        builder: (BuildContext context, Widget? child) => GetMaterialApp(
-              title: 'Flutter',
-              theme: ThemeData(
-                primarySwatch: Colors.blue,
-              ),
-              initialRoute: AppPages.INITIAL,
-              getPages: AppPages.routes,
-              // home: Center(child: Container(child: Text("Vuong")))
-            ));
-  }
-}
-
-// void main() Color.fromARGB(255, 58, 67, 75)   await setup();
-//   runApp(MyApp());
-// }
-
-// Future<void> setup() async {
-//   try {
-//     WidgetsFlutterBinding.ensureInitialized();
-//     await setupFirebase();
-//   }catch(e){
-//     print("🚀 ~ Future<void>setup ~ e:");
-//   }
-//   await registerServices();
-// }
-
-// class MyApp extends StatelessWidget {
-//   final GetIt _getIt = GetIt.instance;
-
-//   late NavigationService _navigationService;
-//   late AuthService _authService;
-
-//   MyApp({super.key}) {
-//     _navigationService = _getIt.get<NavigationService>();
-//     _authService = _getIt.get<AuthService>();
-//   }
-
-//   // const MyApp({super.key});
-//   @override
-//   Widget build (BuildContext context) {
-//     return MaterialApp (
-//       navigatorKey: _navigationService.navigatorKey,
-//       title: 'Flutter Demo',
-//       theme: ThemeData(
-//         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-//         useMaterial3: true,
-//         textTheme: GoogleFonts.montserratTextTheme(),
-//         ), // ThemeData
-//       initialRoute: _authService.user != null ? "/home" : "/login",
-//       routes: _navigationService.routes,
-//     ); // MaterialApp further ubet l'd like to do is open th
-//   }
-// }
