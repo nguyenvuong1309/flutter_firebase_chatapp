@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_firebase_chatapp/chats/chats.dart';
 import 'package:flutter_firebase_chatapp/feed/post/video/video.dart';
+import 'package:flutter_firebase_chatapp/firebase_chat/view/chats_page.dart';
 import 'package:flutter_firebase_chatapp/home/home.dart';
 import 'package:flutter_firebase_chatapp/navigation/navigation.dart';
 import 'package:flutter_firebase_chatapp/stories/stories.dart';
@@ -130,7 +131,7 @@ class _HomeViewState extends State<HomeView> {
           listenable: HomeProvider(),
           builder: (context, child) {
             return PageView.builder(
-              itemCount: 3,
+              itemCount: 4,
               controller: _pageController,
               physics: HomeProvider().enablePageView
                   ? null
@@ -152,6 +153,7 @@ class _HomeViewState extends State<HomeView> {
                       onBackButtonTap: () => HomeProvider().animateToPage(1),
                     ),
                   2 => const ChatsPage(),
+                  3 => const FirebaseChatPage(),
                   _ => AppScaffold(
                       body: widget.navigationShell,
                       bottomNavigationBar:

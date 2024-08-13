@@ -9,6 +9,7 @@ List<NavBarItem> mainNavigationBarItems({
   required String createMediaLabel,
   required String reelsLabel,
   required String userProfileLabel,
+    required String firebase_chat_label,
   required Widget userProfileAvatar,
 }) =>
     <NavBarItem>[
@@ -17,6 +18,7 @@ List<NavBarItem> mainNavigationBarItems({
       NavBarItem(icon: Icons.add_box_outlined, label: createMediaLabel),
       NavBarItem(icon: Icons.video_collection_outlined, label: reelsLabel),
       NavBarItem(child: userProfileAvatar, label: userProfileLabel),
+       NavBarItem(icon: Icons.chat, label: firebase_chat_label),
     ];
 
 class NavBarItem {

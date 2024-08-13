@@ -38,6 +38,7 @@ class BottomNavBar extends StatelessWidget {
       createMediaLabel: context.l10n.createMediaNavBarItemLabel,
       reelsLabel: context.l10n.reelsNavBarItemLabel,
       userProfileLabel: context.l10n.profileNavBarItemLabel,
+      firebase_chat_label: context.l10n.chat_firebase,
       userProfileAvatar: AnimatedCrossFade(
         firstChild: const Icon(Icons.person),
         secondChild: UserProfileAvatar(
@@ -57,7 +58,7 @@ class BottomNavBar extends StatelessWidget {
       currentIndex: navigationShell.currentIndex,
       onTap: (index) {
         HomeProvider().togglePageView(enable: index == 0);
-        if ([0, 1, 2, 3].contains(index)) {
+        if ([0, 1, 2, 3, 4].contains(index)) {
           if (index case 0) videoPlayer.videoPlayerState.playFeed();
           if (index case 1) videoPlayer.videoPlayerState.playTimeline();
           if (index case 2) {
@@ -74,6 +75,9 @@ class BottomNavBar extends StatelessWidget {
             initialLocation: index == navigationShell.currentIndex,
           );
         }
+        if (index == 4) {
+
+          }
         if (index == 0) {
           if (!(index == navigationShell.currentIndex)) return;
           FeedPageController().scrollToTop();

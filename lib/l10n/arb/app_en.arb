@@ -5,6 +5,7 @@
     "description": "Text shown in the Feed screen in the AppBar"
   },
   "homeNavBarItemLabel": "Home",
+  "chat_firebase": "Chat", 
   "@homeNavBarItemLabel": {
     "description": "Home navigation bar item tooltip"
   },

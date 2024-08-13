@@ -5,6 +5,7 @@
     "description": "Текст для заголовка страницы Просмотр ленты"
   },
   "homeNavBarItemLabel": "Лента",
+  "chat_firebase": "чат Firebase",
   "@homeNavBarItemLabel": {
     "description": "Подсказка при зажатии иконки дом на нижней навигационной панели"
   },
