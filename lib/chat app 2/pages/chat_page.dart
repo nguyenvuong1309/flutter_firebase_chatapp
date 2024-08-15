@@ -5,6 +5,7 @@ import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:flutter_firebase_project/chat%20app%202/services/auth_service.dart';
 import 'package:flutter_firebase_project/chat%20app%202/services/database_service.dart';
 import 'package:flutter_firebase_project/chat%20app%202/services/media_service.dart';
+import 'package:flutter_firebase_project/chat%20app%202/widgets/index.dart';
 import 'package:get_it/get_it.dart';
 
 import '../models/chat.dart';
@@ -72,9 +73,69 @@ class _ChatPageState extends State<ChatPage> {
         }
 
         return DashChat(
-          messageOptions: const MessageOptions(
+          messageOptions: MessageOptions(
             showOtherUsersAvatar: true,
             showTime: true,
+            top: (message, previousMessage, nextMessage) {
+              return const Text("22:42, TH 5");
+            },
+            bottom: (message, previousMessage, nextMessage) {
+              return const Text("Đã xem");
+            },
+            messageTextBuilder: (message, previousMessage, nextMessage) {
+              bool isLiked = true;
+
+              return Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      message.text,
+                      style: const TextStyle(color: Colors.black),
+                    ),
+                  ),
+                  if (isLiked)
+                    const Positioned(
+                      right: 0,
+                      bottom: -20,
+                      child: Icon(
+                        Icons.heart_broken,
+                        color: Colors.red,
+                        size: 20,
+                      ),
+                    ),
+                ],
+              );
+            },
+            onLongPressMessage: (message) {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return TripleDialog(
+                    messageText: message.text,
+                  );
+                },
+              );
+              // showDialog(
+              //   context: context,
+              //   builder: (BuildContext context) {
+              //     return AlertDialog(
+              //       title: Text("Tin nhắn"),
+              //       content:
+              //           Text("Bạn đã ấn lâu vào tin nhắn: ${message.text}"),
+              //       actions: <Widget>[
+              //         TextButton(
+              //           child: const Text("Đóng"),
+              //           onPressed: () {
+              //             Navigator.of(context).pop();
+              //           },
+              //         ),
+              //       ],
+              //     );
+              //   },
+              // );
+            },
           ),
           inputOptions: InputOptions(alwaysShowSend: true, trailing: [
             _mediaMessageButton(),
@@ -82,6 +143,7 @@ class _ChatPageState extends State<ChatPage> {
           currentUser: currentUser!,
           onSend: _sendMessage,
           messages: messages,
+          
         );
       },
     );

@@ -7,6 +7,7 @@ class Message {
   String? content;
   MessageType? messageType;
   Timestamp? sentAt;
+  List<Object?> reaction = [];
 
   Message({
     required this.senderID,
