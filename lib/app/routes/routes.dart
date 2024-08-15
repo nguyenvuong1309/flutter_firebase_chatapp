@@ -11,7 +11,7 @@ import 'package:flutter_firebase_chatapp/auth/auth.dart';
 import 'package:flutter_firebase_chatapp/chats/chat/chat.dart';
 import 'package:flutter_firebase_chatapp/feed/feed.dart';
 import 'package:flutter_firebase_chatapp/feed/post/post.dart';
-import 'package:flutter_firebase_chatapp/firebase_chat/view/chats_page.dart';
+import 'package:flutter_firebase_chatapp/firebase_chat/chat-list/view/ChatList.dart';
 import 'package:flutter_firebase_chatapp/home/home.dart';
 import 'package:flutter_firebase_chatapp/reels/reels.dart';
 import 'package:flutter_firebase_chatapp/search/search.dart';
@@ -474,15 +474,37 @@ GoRouter router(AppBloc appBloc) => GoRouter(
                 ),
               ],
             ),
+            // StatefulShellBranch(
+            //   routes: [
+            //     GoRoute(
+            //       path: '/firebase_chat',
+            //       pageBuilder: (context, state) =>
+            //           const MaterialPage<void>(child: ChatList()),
+            //     ),
+            //   ],
+            // )
             StatefulShellBranch(
               routes: [
                 GoRoute(
                   path: '/firebase_chat',
-                  pageBuilder: (context, state) =>
-                      const MaterialPage<void>(child: FirebaseChatPage()),
+                  pageBuilder: (context, state) {
+                    return CustomTransitionPage(
+                      key: state.pageKey,
+                      child: const ChatList(),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        return FadeTransition(
+                          opacity: CurveTween(
+                            curve: Curves.easeInOut,
+                          ).animate(animation),
+                          child: child,
+                        );
+                      },
+                    );
+                  },
                 ),
               ],
-            )
+            ),
           ],
         ),
       ],

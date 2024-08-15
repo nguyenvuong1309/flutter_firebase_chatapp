@@ -13,6 +13,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:persistent_storage/persistent_storage.dart';
 import 'package:powersync_repository/powersync_repository.dart';
+import 'package:flutter_firebase_chatapp/utils/index.dart';
 import 'package:shared/shared.dart';
 
 typedef AppBuilder = FutureOr<Widget> Function(
@@ -56,6 +57,8 @@ Future<void> bootstrap(
       setupDi(appFlavor: appFlavor);
 
       await Firebase.initializeApp();
+
+      await registerServices();
 
       HydratedBloc.storage = await HydratedStorage.build(
         storageDirectory: kIsWeb

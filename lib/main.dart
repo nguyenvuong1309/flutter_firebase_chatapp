@@ -2,6 +2,7 @@ import 'package:chats_repository/chats_repository.dart';
 import 'package:database_client/database_client.dart';
 import 'package:env/env.dart';
 import 'package:firebase_notifications_client/firebase_notifications_client.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_firebase_chatapp/app/app.dart';
 import 'package:flutter_firebase_chatapp/bootstrap.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -14,8 +15,20 @@ import 'package:stories_repository/stories_repository.dart';
 import 'package:supabase_authentication_client/supabase_authentication_client.dart';
 import 'package:token_storage/token_storage.dart';
 import 'package:user_repository/user_repository.dart';
+import 'package:flutter_firebase_chatapp/utils/index.dart';
 
-void main() {
+Future<void> setup() async {
+  // try {
+  //   WidgetsFlutterBinding.ensureInitialized();
+  //   await setupFirebase();
+  // } catch (e) {
+  //   print("🚀 ~ Future<void>setup ~ e:");
+  // }
+  // await registerServices();
+}
+
+void main() async {
+  await setup();
   bootstrap(
     (
       powerSyncRepository,
