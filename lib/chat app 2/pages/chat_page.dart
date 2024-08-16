@@ -55,9 +55,9 @@ class _ChatPageState extends State<ChatPage> {
       appBar: AppBar(
           title: Text(
         widget.chatUser.name!,
-      )), // Text ), // AppBar
+      )),
       body: _buildUI(),
-    ); // Scaffold
+    ); 
   }
 
   Widget _buildUI() {
@@ -114,27 +114,12 @@ class _ChatPageState extends State<ChatPage> {
                 builder: (BuildContext context) {
                   return TripleDialog(
                     messageText: message.text,
+                    onActionSelected: (action) {
+                      print("🚀 ~ _ChatPageState ~ Widget_buildUI ~ $action:");
+                    },
                   );
                 },
               );
-              // showDialog(
-              //   context: context,
-              //   builder: (BuildContext context) {
-              //     return AlertDialog(
-              //       title: Text("Tin nhắn"),
-              //       content:
-              //           Text("Bạn đã ấn lâu vào tin nhắn: ${message.text}"),
-              //       actions: <Widget>[
-              //         TextButton(
-              //           child: const Text("Đóng"),
-              //           onPressed: () {
-              //             Navigator.of(context).pop();
-              //           },
-              //         ),
-              //       ],
-              //     );
-              //   },
-              // );
             },
           ),
           inputOptions: InputOptions(alwaysShowSend: true, trailing: [
@@ -157,7 +142,7 @@ class _ChatPageState extends State<ChatPage> {
           content: chatMessage.medias!.first.url,
           messageType: MessageType.Image,
           sentAt: Timestamp.fromDate(chatMessage.createdAt),
-        ); // Message
+        ); 
         await _databaseService.sendChatMessage(
             currentUser!.id, otherUser!.id, message);
       }
@@ -167,7 +152,7 @@ class _ChatPageState extends State<ChatPage> {
         content: chatMessage.text,
         messageType: MessageType.Text,
         sentAt: Timestamp.fromDate(chatMessage.createdAt),
-      ); // Message
+      ); 
       await _databaseService.sendChatMessage(
           currentUser!.id, otherUser!.id, message);
     }
@@ -184,7 +169,7 @@ class _ChatPageState extends State<ChatPage> {
               url: m.content!,
               fileName: "",
               type: MediaType.image,
-            ), // ChatMedia
+            ),
           ],
         );
       } else {
@@ -226,7 +211,7 @@ class _ChatPageState extends State<ChatPage> {
         },
         icon: Icon(
           Icons.image,
-          color: Theme.of(context).colorScheme.primary, // Icon
-        )); // IconButton
+          color: Theme.of(context).colorScheme.primary,
+        ));
   }
 }

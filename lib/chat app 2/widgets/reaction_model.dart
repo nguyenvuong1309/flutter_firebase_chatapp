@@ -1,71 +1,11 @@
 import 'package:flutter/material.dart';
 
-class ReactionModel extends StatelessWidget {
-  final String messageText;
-
-  const ReactionModel({super.key, required this.messageText});
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text("Chọn hành động"),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          TextButton(
-            child: const Text("Tùy chọn 1"),
-            onPressed: () {
-              Navigator.of(context).pop();
-              _showDetailDialog(
-                  context, "Tùy chọn 1", "Bạn đã chọn tùy chọn 1.");
-            },
-          ),
-          TextButton(
-            child: const Text("Tùy chọn 2"),
-            onPressed: () {
-              Navigator.of(context).pop();
-              _showDetailDialog(
-                  context, "Tùy chọn 2", "Bạn đã chọn tùy chọn 2.");
-            },
-          ),
-          TextButton(
-            child: const Text("Tùy chọn 3"),
-            onPressed: () {
-              Navigator.of(context).pop();
-              _showDetailDialog(
-                  context, "Tùy chọn 3", "Bạn đã chọn tùy chọn 3.");
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _showDetailDialog(BuildContext context, String title, String content) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(title),
-          content: Text(content),
-          actions: <Widget>[
-            TextButton(
-              child: const Text("Đóng"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-}
-
 class TripleDialog extends StatelessWidget {
   final String messageText;
+  final Function(String) onActionSelected;
 
-  const TripleDialog({super.key, required this.messageText});
+  const TripleDialog(
+      {super.key, required this.messageText, required this.onActionSelected});
 
   @override
   Widget build(BuildContext context) {
@@ -73,17 +13,61 @@ class TripleDialog extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          _buildDialog(context, "Tùy chọn 1", "Bạn đã chọn tùy chọn 1."),
-          const SizedBox(height: 10), // Khoảng cách 10 pixel
-          _buildDialog(context, messageText.toString(), ""),
-          const SizedBox(height: 10), // Khoảng cách 10 pixel
-          _buildDialog(context, "Tùy chọn 3", "Bạn đã chọn tùy chọn 3."),
+          _buildDialog1(context),
+          const SizedBox(height: 10),
+          _buildDialog2(context, messageText.toString()),
+          const SizedBox(height: 10),
+          _buildDialog3(context),
         ],
       ),
     );
   }
 
-  Widget _buildDialog(BuildContext context, String title, String content) {
+  Widget _buildDialog1(BuildContext context) {
+    List<String> emojis = [
+      // "😀",
+      // "😃",
+      // "😄",
+      // "😁",
+      // "😆",
+      // "😅",
+      // "😂",
+      "❤️",
+      "👍",
+      "🤣",
+      "😊",
+      "😇"
+    ];
+
+    return Container(
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Wrap(
+        spacing: 16.0,
+        runSpacing: 16.0,
+        alignment: WrapAlignment.center,
+        children: emojis
+            .map((emoji) => GestureDetector(
+                  onTap: () {
+                    onActionSelected(emoji);
+                  },
+                  child: Text(
+                    emoji,
+                    style: const TextStyle(
+                      fontSize: 39.5,
+                    ),
+                  ),
+                ))
+            .toList(),
+      ),
+    );
+  }
+
+  Widget _buildDialog2(BuildContext context, String title) {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
@@ -94,20 +78,65 @@ class TripleDialog extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            title,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+          SizedBox(
+            width: double.infinity,
+            child: Text(
+              title,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDialog3(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          GestureDetector(
+            onTap: () {
+              onActionSelected('reply');
+            },
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text("Trả lời", style: TextStyle(fontSize: 20)),
+                Icon(Icons.reply, color: Colors.blue),
+              ],
+            ),
           ),
-          const SizedBox(height: 5),
-          Text(content),
-          const SizedBox(height: 5),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: TextButton(
-              child: const Text("Đóng"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+          const Divider(color: Colors.brown, thickness: 2),
+          GestureDetector(
+            onTap: () {
+              onActionSelected('edit');
+            },
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text("Chỉnh sửa", style: TextStyle(fontSize: 20)),
+                Icon(Icons.edit, color: Colors.blue),
+              ],
+            ),
+          ),
+          const Divider(color: Colors.brown, thickness: 2),
+          GestureDetector(
+            onTap: () {
+              onActionSelected('delete');
+            },
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text("Xóa", style: TextStyle(fontSize: 20)),
+                Icon(Icons.delete, color: Colors.blue),
+              ],
             ),
           ),
         ],
