@@ -15,32 +15,40 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: GrantBirki/git-diff-action@v2.4.0 # A GitHub action for gathering the git diff of our pull request
+      - uses: GrantBirki/git-diff-action@v2.4.0
         id: git-diff
         with:
           raw_diff_file_output: diff.txt
-          file_output_only: "true" # Makes us exclude printing the diff on the console for security purposes
+          file_output_only: "true"
 
       - name: Perform Code Review With GPT-4
         id: code_review_suggestions
         run: |
-          # Get the code changes
-          changed_code=$(cat ${{ steps.git-diff.outputs.raw_diff_file_output }})
+          # Kiểm tra xem file diff.txt có tồn tại và không rỗng
+          if [ -s "${{ steps.git-diff.outputs.raw_diff_file_output }}" ]; then
+            changed_code=$(cat "${{ steps.git-diff.outputs.raw_diff_file_output }}")
 
-          echo "PR Changes $changed_code"
+            # Escape newlines and double quotes in the changed_code
+            escaped_code=$(echo "$changed_code" | jq -s -R -r @json)
 
-          # Escape newlines and double quotes in the changed_code
-          escaped_code=$(echo "$changed_code" | jq -s -R -r @json)
+            # Tạo request JSON
+            request_payload=$(jq -n \
+              --arg prompt "${{ secrets.CODE_REVIEW_PROMPT }}" \
+              --arg code "$escaped_code" \
+              '{
+                model: "gpt-3.5-turbo",
+                messages: [
+                  { role: "system", content: $prompt },
+                  { role: "user", content: $code }
+                ]
+              }')
 
-          response=$(curl https://api.openai.com/v1/chat/completions \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer ${{ secrets.OPEN_AI_KEY }}" \
-            -d "{
-              \"model\": \"gpt-3.5-turbo\",
-              \"messages\": [
-                { \"role\": \"system\", \"content\": \"${{ secrets.CODE_REVIEW_PROMPT }}\" },
-                { \"role\": \"user\", \"content\": $escaped_code }
-              ]
-            }")
-          
-          echo "This is the response $response"
+            response=$(curl https://api.openai.com/v1/chat/completions \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Bearer ${{ secrets.OPEN_AI_KEY }}" \
+              -d "$request_payload")
+
+            echo "This is the response: $response"
+          else
+            echo "No changes detected in the pull request."
+          fi
