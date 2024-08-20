@@ -2,7 +2,7 @@ name: GPT Code review
 
 on:
   pull_request:
-    permissions:
+  permissions:
       contents: read
       issues: write
       pull-requests: write
@@ -28,4 +28,21 @@ jobs:
           changed_code=$(cat ${{steps.git-diff.outputs.raw-diff-path}})
           
           echo "PR Changes $changed_code"
+
+
+          # Escape newlines and double quotes in the changed_code
+          escaped_code=$(echo $"changed_files" | jq -s -R -r @json)
+          
+          response=$(curl https://api.openai.com/v1/chat/completions \
+          -H "Content-Type: application/json" \
+          -H "Authorization: Bearer ${{ secrets.OPEN_AI_KEY }}" \
+          -d "{
+            \"model\": \"gpt-4\",
+            \"messages\": [
+              { \"role\": \"system\", \"content\": \"${{ vars.CODE_REVIEW_PROMPT }}\" }
+              { \"role\": \"user\", \"content\": $escaped_code }
+            ]
+          }")
+          
+          echo "This is the response $response"
 
