@@ -1,0 +1,31 @@
+name: GPT Code review   
+
+on:
+  pull_request:
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+  
+jobs:
+  code_review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.1.1
+        with:
+          fetch-depth: 0
+
+      - uses: GrantBirki/git-diff-action@v2.4.0 # A GitHub action for gathering the git diff of our pull request
+        id: git-diff
+        with:
+          raw_diff_file_output: diff.txt
+          file_output_only: "true" # Makes us exclude printing the diff on the console for security purposes
+
+      - name: Perform Code Review With GPT-4
+        id: code_review_suggestions
+        run: |
+          # Get the code changes
+          changed_code=$(cat ${{steps.git-diff.outputs.raw-diff-path}})
+          
+          echo "PR Changes $changed_code"
+
