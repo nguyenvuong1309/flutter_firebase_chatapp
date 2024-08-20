@@ -26,21 +26,21 @@ jobs:
         run: |
           # Gán giá trị cụ thể cho changed_code
           changed_code=$(cat << 'EOF'
-                    --- a/lib/main.dart
-                    +++ b/lib/main.dart
-                    @@ -16,10 +16,6 @@ void main() async {
-                       runApp(MyApp());
-                     }
-                    
-                    -
-                    -
-                    -
-                    -
-                     Future<void> setup() async {
-                       try {
-                         WidgetsFlutterBinding.ensureInitialized();
-                    EOF
-                    )
+--- a/lib/main.dart
++++ b/lib/main.dart
+@@ -16,10 +16,6 @@ void main() async {
+   runApp(MyApp());
+ }
+
+-
+-
+-
+-
+Future<void> setup() async {
+   try {
+     WidgetsFlutterBinding.ensureInitialized();
+EOF
+)
 
           # Escape newlines and double quotes in the changed_code
           escaped_code=$(echo "$changed_code" | sed ':a;N;$!ba;s/\n/\\n/g' | sed 's/"/\\"/g')
@@ -48,12 +48,4 @@ jobs:
           response=$(curl https://api.openai.com/v1/chat/completions \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer ${{ secrets.OPEN_AI_KEY }}" \
-            -d "{
-              \"model\": \"gpt-3.5-turbo\",
-              \"messages\": [
-                { \"role\": \"system\", \"content\": \"${{ secrets.CODE_REVIEW_PROMPT }}\" },
-                { \"role\": \"user\", \"content\": \"$escaped_code\" }
-              ]
-            }")
-
-          echo "This is the response: $response"
+            -
