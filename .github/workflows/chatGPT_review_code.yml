@@ -28,6 +28,7 @@ jobs:
           changed_code=$(cat diff.txt)
           
           echo "PR Changes: $changed_code"
+          echo "OPEN_API_KEY: $OPEN_API_KEY"
           
           # Assuming code_review_suggestions is supposed to process the code, here we're just using the raw diff
           code_review_suggestions=$(echo "$changed_code" | jq -r '.choices[0].message.content' || echo "$changed_code")
