@@ -25,10 +25,18 @@ jobs:
           uses: mobiledevops/flutter-sdk-action@v1.0.0
           with:
             flutter-sdk-version: 3.19.5
-        - run: flutter --version
-        - run: flutter pub get
-        # - run: flutter test
-        - run: flutter build apk --debug --split-per-abi
+        
+        - name: 🚀 Check flutter version.
+          run: flutter --version
+        
+        - name: 🚀 Install dependencies.
+          run: flutter pub get
+
+        - name: 🚀 Analyze project source
+          run: dart analyze
+
+        - name: 🚀 Build ios apk.
+          run: flutter build apk --debug --split-per-abi
         - run: |
             flutter build ios --no-codesign
             cd build/ios/iphoneos
@@ -43,7 +51,7 @@ jobs:
             artifacts: "build/app/outputs/apk/debug/*,build/ios/iphoneos/app.ipa"
             tag: v1.0.${{ github.run_number }}
             token: ${{ secrets.TOKEN_GITHUB }}
-  
+
   
   
   
