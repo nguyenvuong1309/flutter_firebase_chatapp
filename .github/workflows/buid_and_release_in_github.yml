@@ -20,10 +20,12 @@ jobs:
         - uses: actions/setup-java@v1
           with:
             java-version: '12.x'
-        - uses: subosito/flutter-action@v2
+        - uses: actions/checkout@v3
+        - name: Install Flutter SDK
+          uses: mobiledevops/flutter-sdk-action@v1.0.0
           with:
-            flutter-version: '3.3.0'
-            channel: 'beta'
+            flutter-sdk-version: 3.3.0
+        - run: flutter --version
         - run: flutter pub get
         - run: flutter test
         - run: flutter build apk --debug --split-per-abi
