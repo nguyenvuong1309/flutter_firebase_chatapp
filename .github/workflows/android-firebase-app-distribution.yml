@@ -55,10 +55,7 @@ on:
 
 jobs:
   build:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest  # Specify to use only Ubuntu
     timeout-minutes: 30
 
     steps:
@@ -115,13 +112,6 @@ jobs:
       - name: 📦 Get Flutter dependencies
         run: flutter pub get
         continue-on-error: true
-      
-      # - name: 🏗️ Clean and Build APK with Gradle
-      #   run: gradlew clean
-        # run: |
-        #   ./gradlew clean
-        #   ./gradlew assembleRelease
-        # continue-on-error: true
 
       - name: 📱 Build APK
         run: flutter build apk
